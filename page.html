@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada de João Vitor Jacundá - O Arquiteto da Síntese</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: The application is structured as an interactive "Hero's Journey" timeline. This non-linear, thematic approach was chosen over a simple chronological list to create a compelling narrative of growth and transformation, aligning with the "Arquiteto da Síntese" personal brand. The user navigates through 8 key stages, from the "Mundo Comum" to the "Retorno com o Elixir". Clicking on a stage reveals detailed information in a central panel, allowing for focused exploration. This structure enhances user engagement by turning a resume into an explorable story, making the candidate's journey more memorable and impactful. A central skills chart provides a quick, visual summary of core competencies. -->
+    <!-- Visualization & Content Choices: Report Info: Career path -> Goal: Showcase growth & synthesis -> Viz/Method: Interactive timeline (HTML/CSS/JS) + Radar Chart (Chart.js). Interaction: Clickable stages update a detail panel. Justification: The timeline visually represents the "Jornada do Herói," making the career progression engaging. The radar chart effectively displays the balance between technical and strategic skills, reinforcing the "Arquiteto da Síntese" theme. This is more impactful than a simple list or bar charts. Library/Method: Tailwind for layout, Chart.js for visualization (Canvas-based). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F8F7F4; 
+        }
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .journey-path {
+            position: relative;
+            border-color: #D1D5DB;
+        }
+        .journey-node {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .journey-node:hover, .journey-node.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(255, 87, 51, 0.2), 0 4px 6px -2px rgba(255, 87, 51, 0.1);
+            border-color: #FF5733;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto px-4 py-8 md:py-16">
+
+        <header class="text-center mb-12 md:mb-20">
+            <h1 class="font-montserrat font-black text-4xl md:text-6xl text-[#0A2342] uppercase">João Vitor Jacundá</h1>
+            <p class="mt-4 text-xl md:text-2xl text-[#FF5733] font-bold">O Arquiteto da Síntese</p>
+            <p class="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-600">
+                Uma jornada interativa pela carreira de um líder que constrói pontes entre tecnologia e estratégia para gerar resultados exponenciais. Navegue pelas etapas para descobrir a história.
+            </p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            
+            <div id="journey-timeline" class="lg:col-span-1 order-2 lg:order-1">
+                <h2 class="font-montserrat text-2xl font-bold text-center mb-6 text-[#0A2342]">A Jornada do Herói</h2>
+                <div class="space-y-8 relative journey-path before:content-[''] before:absolute before:left-5 before:top-0 before:h-full before:w-0.5 before:bg-gray-200">
+                </div>
+            </div>
+
+            <div id="journey-details" class="lg:col-span-2 order-1 lg:order-2 bg-white p-6 md:p-8 rounded-2xl shadow-lg min-h-[500px] flex flex-col justify-center">
+                <div class="text-center">
+                    <h3 class="font-montserrat text-3xl font-bold text-[#0A2342]">Bem-vindo</h3>
+                    <p class="mt-4 text-lg text-gray-600">Selecione uma etapa da jornada à esquerda para explorar os detalhes, desafios e conquistas de cada fase da minha carreira.</p>
+                     <div class="mt-8 chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-16">
+            <p class="text-gray-500">Storytelling interativo desenvolvido para demonstrar uma trajetória de crescimento e impacto.</p>
+        </footer>
+    </div>
+
+    <script>
+        const journeyData = [
+            {
+                id: 1,
+                title: "O Mundo Comum",
+                subtitle: "Fundação em Ciência da Computação",
+                icon: "🎓",
+                content: `A jornada começa no mundo estruturado da academia. Com um Bacharelado em Ciência da Computação, a base foi solidificada não apenas no currículo, mas em duas Iniciações Científicas com artigos publicados. Um reino de lógica, algoritmos e excelência teórica, preparando o terreno para os desafios do mundo real.`
+            },
+            {
+                id: 2,
+                title: "O Chamado à Aventura",
+                subtitle: "Estágio em Python para o Mercado Financeiro",
+                icon: "💹",
+                content: `O chamado veio na forma de um desafio: desenvolver um sistema web para investimentos na B3. O código abstrato ganhou um propósito no volátil mercado financeiro. Foi o primeiro vislumbre de que a tecnologia poderia ser uma poderosa ferramenta para decifrar sistemas complexos e gerar valor tangível.`
+            },
+            {
+                id: 3,
+                title: "O Encontro com o Mentor",
+                subtitle: "Imersão em Gestão e Liderança",
+                icon: "🚀",
+                content: `A experiência como Gerente Geral foi o grande mentor. Forçado a pensar além do código - em receita, estratégia e pessoas - aprendi na prática os princípios da liderança. A recompensa: ser um dos responsáveis por um <strong>aumento de mais de 150% na receita</strong>, provando o poder da sinergia entre tecnologia e gestão.`
+            },
+            {
+                id: 4,
+                title: "A Travessia do Limiar",
+                subtitle: "Educação Contínua e Estratégica",
+                icon: "📚",
+                content: `Com as lições da prática, cruzei um limiar decisivo, abraçando o caminho do 'Arquiteto da Síntese'. Iniciei, simultaneamente, Pós-Graduações em <strong>Gestão de Projetos</strong> e <strong>Data Science & IA</strong>. Não mais uma exploração, mas a construção deliberada de uma ponte permanente entre os mundos da tecnologia e dos negócios.`
+            },
+            {
+                id: 5,
+                title: "Testes, Aliados e Inimigos",
+                subtitle: "Consultoria e Projetos de Alto Impacto",
+                icon: "🛡️",
+                content: `O novo mundo apresentou uma série de testes para forjar minhas habilidades híbridas: <br><br> • <strong>Impacto Social:</strong> Liderança voluntária no desenvolvimento de uma plataforma de dados para a COVID-19. <br> • <strong>Risco Corporativo:</strong> Auditoria de tecnologia para clientes SOX, navegando em ambientes complexos e regulados. <br> • <strong>Inovação Industrial:</strong> Consultoria em Indústria 4.0, aplicando conceitos de vanguarda para otimizar processos.`
+            },
+            {
+                id: 6,
+                title: "A Provação",
+                subtitle: "Especialista em Tecnologia e Power Platform",
+                icon: "🔧",
+                content: `A provação foi um mergulho profundo no desenvolvimento prático como Especialista em Tecnologia. Dominando o Power Platform (Apps, Automate, BI) e SharePoint, afiei as ferramentas para construir soluções que resolviam problemas de negócio do dia a dia, preparando-me para o desafio final da síntese.`
+            },
+            {
+                id: 7,
+                title: "A Recompensa",
+                subtitle: "Especialista em Data Science e Gestão de Produtos",
+                icon: "💡",
+                content: `A posição de Especialista em Infraestrutura e Suprimentos materializa a síntese. Gerenciando o ciclo de vida completo de produtos - da análise de dados à gestão do projeto e arquitetura da infraestrutura. A recompensa não é um título, mas a rara capacidade de traduzir fluentemente entre os domínios da tecnologia, dados e estratégia.`
+            },
+            {
+                id: 8,
+                title: "O Retorno com o Elixir",
+                subtitle: "Pronto para Transformar",
+                icon: "✨",
+                content: `Com o 'elixir' do pensamento interdisciplinar, estou pronto para aplicar este poder de síntese em novos desafios. O objetivo é ingressar em uma organização como um agente de transformação, usando a capacidade de unir Data Science, Gestão de Projetos e visão de negócios para impulsionar inovação e crescimento sustentável.`
+            }
+        ];
+
+        const timelineContainer = document.getElementById('journey-timeline').querySelector('.space-y-8');
+        const detailsContainer = document.getElementById('journey-details');
+        let skillsChart;
+
+        function displayDetails(item) {
+            detailsContainer.innerHTML = `
+                <div class="text-left animate-fade-in">
+                    <span class="text-4xl">${item.icon}</span>
+                    <h3 class="font-montserrat text-2xl md:text-3xl font-bold text-[#0A2342] mt-4">${item.title}</h3>
+                    <p class="mt-2 text-lg font-bold text-[#FF5733]">${item.subtitle}</p>
+                    <p class="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">${item.content}</p>
+                </div>
+            `;
+            
+            document.querySelectorAll('.journey-node').forEach(node => {
+                node.classList.remove('active');
+                if (parseInt(node.dataset.id) === item.id) {
+                    node.classList.add('active');
+                }
+            });
+        }
+
+        function createSkillsChart() {
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            if (skillsChart) {
+                skillsChart.destroy();
+            }
+            skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Data Science & IA', 'Gestão de Projetos', 'Estratégia de Negócios', 'Desenvolvimento (Python/Power Platform)', 'Liderança', 'Consultoria & Risco'],
+                    datasets: [{
+                        label: 'Nível de Competência',
+                        data: [85, 90, 80, 95, 88, 75],
+                        backgroundColor: 'rgba(255, 87, 51, 0.2)',
+                        borderColor: '#FF5733',
+                        pointBackgroundColor: '#FF5733',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#FF5733'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#EAECEE'
+                            },
+                            grid: {
+                                color: '#EAECEE'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12,
+                                    family: 'Roboto'
+                                },
+                                color: '#0A2342'
+                            },
+                            ticks: {
+                                backdropColor: '#F8F7F4',
+                                color: '#AAB7B8',
+                                stepSize: 25
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            journeyData.forEach(item => {
+                const node = document.createElement('div');
+                node.className = 'flex items-start journey-node bg-white p-4 rounded-lg shadow-md border-2 border-transparent';
+                node.dataset.id = item.id;
+                node.innerHTML = `
+                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-[#0A2342] text-white flex items-center justify-center text-xl mr-4">${item.icon}</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-[#0A2342]">${item.title}</h4>
+                        <p class="text-sm text-gray-500">${item.subtitle}</p>
+                    </div>
+                `;
+                node.addEventListener('click', () => displayDetails(item));
+                timelineContainer.appendChild(node);
+            });
+            
+            createSkillsChart();
+        });
+
+    </script>
+</body>
+</html>
