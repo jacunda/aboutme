@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: The application is structured as an interactive "Hero's Journey" timeline. This non-linear, thematic approach was chosen over a simple chronological list to create a compelling narrative of growth and transformation, aligning with the "Arquiteto da Síntese" personal brand. The user navigates through 8 key stages, from the "Mundo Comum" to the "Retorno com o Elixir". Clicking on a stage reveals detailed information in a central panel, allowing for focused exploration. This structure enhances user engagement by turning a resume into an explorable story, making the candidate's journey more memorable and impactful. A central skills chart provides a quick, visual summary of core competencies. -->
-    <!-- Visualization & Content Choices: Report Info: Career path -> Goal: Showcase growth & synthesis -> Viz/Method: Interactive timeline (HTML/CSS/JS) + Radar Chart (Chart.js). Interaction: Clickable stages update a detail panel. Justification: The timeline visually represents the "Jornada do Herói," making the career progression engaging. The radar chart effectively displays the balance between technical and strategic skills, reinforcing the "Arquiteto da Síntese" theme. This is more impactful than a simple list or bar charts. Library/Method: Tailwind for layout, Chart.js for visualization (Canvas-based). -->
+    <!-- Application Structure Plan: The application is structured using the 5-stage "Hero's Journey" model (Mundo Comum, Chamado, Obstáculos, Vitória, Retorno). This narrative structure was chosen to align with the user's personal story of transformation, moving from a small town to major cities in pursuit of growth. The user interacts with a vertical timeline, where each stage reveals a detailed part of the story. This creates an emotional and engaging flow, making the professional journey more memorable than a standard resume. A central skills chart visually represents the "elixir" - the final synthesis of competencies. -->
+    <!-- Visualization & Content Choices: Report Info: Personal and professional journey -> Goal: Tell a compelling transformation story -> Viz/Method: 5-stage interactive timeline (HTML/CSS/JS) + Radar Chart (Chart.js). Interaction: Clicking a stage updates the main content panel. Justification: The Hero's Journey framework gives emotional weight to the career path. The timeline visually separates the key turning points, while the radar chart provides a concise, powerful summary of the skills acquired through the journey. This is more effective for personal branding than a simple chronological list. Library/Method: Tailwind for layout, Chart.js for visualization (Canvas-based). -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -31,8 +31,8 @@
         }
         .journey-node:hover, .journey-node.active {
             transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(255, 87, 51, 0.2), 0 4px 6px -2px rgba(255, 87, 51, 0.1);
-            border-color: #FF5733;
+            box-shadow: 0 10px 15px -3px rgba(10, 35, 66, 0.2), 0 4px 6px -2px rgba(10, 35, 66, 0.1);
+            border-color: #0A2342;
         }
         .chart-container {
             position: relative;
@@ -43,6 +43,13 @@
             height: 40vh;
             max-height: 400px;
         }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -51,9 +58,9 @@
 
         <header class="text-center mb-12 md:mb-20">
             <h1 class="font-montserrat font-black text-4xl md:text-6xl text-[#0A2342] uppercase">João Vitor Jacundá</h1>
-            <p class="mt-4 text-xl md:text-2xl text-[#FF5733] font-bold">O Arquiteto da Síntese</p>
+            <p class="mt-4 text-xl md:text-2xl text-[#FF5733] font-bold">A Jornada de um Inquieto</p>
             <p class="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-600">
-                Uma jornada interativa pela carreira de um líder que constrói pontes entre tecnologia e estratégia para gerar resultados exponenciais. Navegue pelas etapas para descobrir a história.
+                Uma história sobre sair do lugar comum, movido por uma sede de ser e saber mais. Navegue pelas etapas da jornada para descobrir como a curiosidade moldou um caminho do Tocantins ao epicentro da tecnologia no Brasil.
             </p>
         </header>
 
@@ -61,7 +68,7 @@
             
             <div id="journey-timeline" class="lg:col-span-1 order-2 lg:order-1">
                 <h2 class="font-montserrat text-2xl font-bold text-center mb-6 text-[#0A2342]">A Jornada do Herói</h2>
-                <div class="space-y-8 relative journey-path before:content-[''] before:absolute before:left-5 before:top-0 before:h-full before:w-0.5 before:bg-gray-200">
+                <div class="space-y-6 relative journey-path before:content-[''] before:absolute before:left-5 before:top-0 before:h-full before:w-0.5 before:bg-gray-200">
                 </div>
             </div>
 
@@ -78,6 +85,7 @@
 
         <footer class="text-center mt-16">
             <p class="text-gray-500">Storytelling interativo desenvolvido para demonstrar uma trajetória de crescimento e impacto.</p>
+             <p class="text-xs text-gray-400 mt-2">Justificativa: Modelo "Arco do Herói" escolhido por sua adequação a narrativas de transformação pessoal e superação. Validado por Ricardo.</p>
         </footer>
     </div>
 
@@ -85,68 +93,48 @@
         const journeyData = [
             {
                 id: 1,
-                title: "O Mundo Comum",
-                subtitle: "Fundação em Ciência da Computação",
-                icon: "🎓",
-                content: `A jornada começa no mundo estruturado da academia. Com um Bacharelado em Ciência da Computação, a base foi solidificada não apenas no currículo, mas em duas Iniciações Científicas com artigos publicados. Um reino de lógica, algoritmos e excelência teórica, preparando o terreno para os desafios do mundo real.`
+                title: "Mundo Comum",
+                subtitle: "As Raízes no Tocantins",
+                icon: "🏡",
+                content: `A jornada começa em Arraias, uma cidade com 11 mil habitantes no sudeste do Tocantins. Este era meu mundo: um lugar de raízes fortes, mas com horizontes que pareciam distantes. A paixão por tecnologia já existia, me levando a cruzar a divisa do estado todos os dias para um curso técnico em informática em Goiás. Era o primeiro sinal da minha inquietude e da vontade de buscar o conhecimento onde ele estivesse.`
             },
             {
                 id: 2,
                 title: "O Chamado à Aventura",
-                subtitle: "Estágio em Python para o Mercado Financeiro",
-                icon: "💹",
-                content: `O chamado veio na forma de um desafio: desenvolver um sistema web para investimentos na B3. O código abstrato ganhou um propósito no volátil mercado financeiro. Foi o primeiro vislumbre de que a tecnologia poderia ser uma poderosa ferramenta para decifrar sistemas complexos e gerar valor tangível.`
+                subtitle: "A Sede por Mais Conhecimento",
+                icon: "🗺️",
+                content: `O primeiro chamado me levou à capital, Palmas, para cursar Ciência da Computação na UFT. Mas a inquietude falou mais alto. Eu sentia que precisava de mais, de um desafio maior. O verdadeiro chamado foi a decisão de deixar tudo para trás e ir para a UFMG, em Belo Horizonte. Era a busca por um ecossistema mais avançado, um salto em direção ao desconhecido, movido pela sede de 'ter mais, ser mais, me capacitar mais'.`
             },
             {
                 id: 3,
-                title: "O Encontro com o Mentor",
-                subtitle: "Imersão em Gestão e Liderança",
-                icon: "🚀",
-                content: `A experiência como Gerente Geral foi o grande mentor. Forçado a pensar além do código - em receita, estratégia e pessoas - aprendi na prática os princípios da liderança. A recompensa: ser um dos responsáveis por um <strong>aumento de mais de 150% na receita</strong>, provando o poder da sinergia entre tecnologia e gestão.`
+                title: "Obstáculos",
+                subtitle: "A Prova de Fogo e a Adaptação",
+                icon: "⛰️",
+                content: `A vida em um novo estado trouxe desafios reais. As dificuldades para me manter me forçaram a um recuo estratégico, retornando ao Tocantins para concluir a graduação mais rápido. Mas isso não foi uma derrota, foi uma lição de resiliência. Após a formatura, a jornada recomeçou com mais força: uma peregrinação por centros de inovação — Brasília, Florianópolis e, finalmente, São Paulo — cada cidade um novo obstáculo, uma nova adaptação e um degrau a mais na minha formação.`
             },
             {
                 id: 4,
-                title: "A Travessia do Limiar",
-                subtitle: "Educação Contínua e Estratégica",
-                icon: "📚",
-                content: `Com as lições da prática, cruzei um limiar decisivo, abraçando o caminho do 'Arquiteto da Síntese'. Iniciei, simultaneamente, Pós-Graduações em <strong>Gestão de Projetos</strong> e <strong>Data Science & IA</strong>. Não mais uma exploração, mas a construção deliberada de uma ponte permanente entre os mundos da tecnologia e dos negócios.`
+                title: "Vitória e Revelação",
+                subtitle: "O Arquiteto da Síntese",
+                icon: "💡",
+                content: `Em São Paulo, as peças se encaixaram. As experiências em consultoria, gestão e desenvolvimento profundo com Power Platform e Data Science se fundiram. A vitória não foi chegar a um lugar, mas a revelação de uma identidade profissional: o 'Arquiteto da Síntese'. A capacidade de não apenas programar ou gerenciar, mas de traduzir necessidades complexas de negócio em soluções tecnológicas eficazes, unindo mundos que muitos veem como separados.`
             },
             {
                 id: 5,
-                title: "Testes, Aliados e Inimigos",
-                subtitle: "Consultoria e Projetos de Alto Impacto",
-                icon: "🛡️",
-                content: `O novo mundo apresentou uma série de testes para forjar minhas habilidades híbridas: <br><br> • <strong>Impacto Social:</strong> Liderança voluntária no desenvolvimento de uma plataforma de dados para a COVID-19. <br> • <strong>Risco Corporativo:</strong> Auditoria de tecnologia para clientes SOX, navegando em ambientes complexos e regulados. <br> • <strong>Inovação Industrial:</strong> Consultoria em Indústria 4.0, aplicando conceitos de vanguarda para otimizar processos.`
-            },
-            {
-                id: 6,
-                title: "A Provação",
-                subtitle: "Especialista em Tecnologia e Power Platform",
-                icon: "🔧",
-                content: `A provação foi um mergulho profundo no desenvolvimento prático como Especialista em Tecnologia. Dominando o Power Platform (Apps, Automate, BI) e SharePoint, afiei as ferramentas para construir soluções que resolviam problemas de negócio do dia a dia, preparando-me para o desafio final da síntese.`
-            },
-            {
-                id: 7,
-                title: "A Recompensa",
-                subtitle: "Especialista em Data Science e Gestão de Produtos",
-                icon: "💡",
-                content: `A posição de Especialista em Infraestrutura e Suprimentos materializa a síntese. Gerenciando o ciclo de vida completo de produtos - da análise de dados à gestão do projeto e arquitetura da infraestrutura. A recompensa não é um título, mas a rara capacidade de traduzir fluentemente entre os domínios da tecnologia, dados e estratégia.`
-            },
-            {
-                id: 8,
-                title: "O Retorno com o Elixir",
+                title: "Retorno com o Elixir",
                 subtitle: "Pronto para Transformar",
                 icon: "✨",
-                content: `Com o 'elixir' do pensamento interdisciplinar, estou pronto para aplicar este poder de síntese em novos desafios. O objetivo é ingressar em uma organização como um agente de transformação, usando a capacidade de unir Data Science, Gestão de Projetos e visão de negócios para impulsionar inovação e crescimento sustentável.`
+                content: `Hoje, estabelecido em São Paulo, carrego o 'elixir': a visão integrada entre tecnologia, dados e estratégia, forjada na jornada do interior para a metrópole. Sei que este não é o destino final. O retorno é um estado de prontidão contínua para aplicar essa capacidade de síntese em desafios maiores, para construir pontes e gerar transformação em qualquer ambiente. A jornada continua, e o elixir é a minha ferramenta para moldar o futuro.`
             }
         ];
 
-        const timelineContainer = document.getElementById('journey-timeline').querySelector('.space-y-8');
+        const timelineContainer = document.getElementById('journey-timeline').querySelector('.space-y-6');
         const detailsContainer = document.getElementById('journey-details');
         let skillsChart;
 
         function displayDetails(item) {
-            detailsContainer.innerHTML = `
+            const currentContent = detailsContainer.innerHTML;
+            const newContent = `
                 <div class="text-left animate-fade-in">
                     <span class="text-4xl">${item.icon}</span>
                     <h3 class="font-montserrat text-2xl md:text-3xl font-bold text-[#0A2342] mt-4">${item.title}</h3>
@@ -154,6 +142,10 @@
                     <p class="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">${item.content}</p>
                 </div>
             `;
+
+            if (currentContent !== newContent) {
+                 detailsContainer.innerHTML = newContent;
+            }
             
             document.querySelectorAll('.journey-node').forEach(node => {
                 node.classList.remove('active');
@@ -171,16 +163,16 @@
             skillsChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Data Science & IA', 'Gestão de Projetos', 'Estratégia de Negócios', 'Desenvolvimento (Python/Power Platform)', 'Liderança', 'Consultoria & Risco'],
+                    labels: ['Data Science & IA', 'Gestão de Projetos', 'Estratégia de Negócios', 'Desenvolvimento (Python/Power Platform)', 'Resiliência & Adaptação', 'Visão de Produto'],
                     datasets: [{
-                        label: 'Nível de Competência',
-                        data: [85, 90, 80, 95, 88, 75],
-                        backgroundColor: 'rgba(255, 87, 51, 0.2)',
-                        borderColor: '#FF5733',
-                        pointBackgroundColor: '#FF5733',
+                        label: 'Competências do Elixir',
+                        data: [85, 90, 80, 95, 98, 88],
+                        backgroundColor: 'rgba(10, 35, 66, 0.2)',
+                        borderColor: '#0A2342',
+                        pointBackgroundColor: '#0A2342',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#FF5733'
+                        pointHoverBorderColor: '#0A2342'
                     }]
                 },
                 options: {
@@ -204,8 +196,11 @@
                             ticks: {
                                 backdropColor: '#F8F7F4',
                                 color: '#AAB7B8',
-                                stepSize: 25
-                            }
+                                stepSize: 25,
+                                display: false
+                            },
+                             min: 0,
+                             max: 100
                         }
                     },
                     plugins: {
@@ -248,6 +243,11 @@
             });
             
             createSkillsChart();
+
+            // Display the first item by default
+            if (journeyData.length > 0) {
+                displayDetails(journeyData[0]);
+            }
         });
 
     </script>
