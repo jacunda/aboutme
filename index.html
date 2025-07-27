@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Jornada de João Vitor Jacundá - O Arquiteto da Síntese</title>
+    <title>A Jornada de João Vitor Jacundá</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: The application is structured using the 5-stage "Hero's Journey" model (Mundo Comum, Chamado, Obstáculos, Vitória, Retorno). This narrative structure was chosen to align with the user's personal story of transformation, moving from a small town to major cities in pursuit of growth. The user interacts with a vertical timeline, where each stage reveals a detailed part of the story. This creates an emotional and engaging flow, making the professional journey more memorable than a standard resume. A central skills chart visually represents the "elixir" - the final synthesis of competencies. -->
-    <!-- Visualization & Content Choices: Report Info: Personal and professional journey -> Goal: Tell a compelling transformation story -> Viz/Method: 5-stage interactive timeline (HTML/CSS/JS) + Radar Chart (Chart.js). Interaction: Clicking a stage updates the main content panel. Justification: The Hero's Journey framework gives emotional weight to the career path. The timeline visually separates the key turning points, while the radar chart provides a concise, powerful summary of the skills acquired through the journey. This is more effective for personal branding than a simple chronological list. Library/Method: Tailwind for layout, Chart.js for visualization (Canvas-based). -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+ 
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -60,14 +57,14 @@
             <h1 class="font-montserrat font-black text-4xl md:text-6xl text-[#0A2342] uppercase">João Vitor Jacundá</h1>
             <p class="mt-4 text-xl md:text-2xl text-[#FF5733] font-bold">A Jornada de um Inquieto</p>
             <p class="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-600">
-                Uma história sobre sair do lugar comum, movido por uma sede de ser e saber mais. Navegue pelas etapas da jornada para descobrir como a curiosidade moldou um caminho até o epicentro da tecnologia no Brasil.
+                Uma história sobre sair do lugar comum, movido por uma sede de ser e saber mais. Navegue pela minha jornada e descubra como a curiosidade me levou até epicentro da tecnologia no Brasil.
             </p>
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             
             <div id="journey-timeline" class="lg:col-span-1 order-2 lg:order-1">
-                <h2 class="font-montserrat text-2xl font-bold text-center mb-6 text-[#0A2342]">A Jornada do Herói</h2>
+                <h2 class="font-montserrat text-2xl font-bold text-center mb-6 text-[#0A2342]">Minha Jornada</h2>
                 <div class="space-y-6 relative journey-path before:content-[''] before:absolute before:left-5 before:top-0 before:h-full before:w-0.5 before:bg-gray-200">
                 </div>
             </div>
@@ -75,7 +72,7 @@
             <div id="journey-details" class="lg:col-span-2 order-1 lg:order-2 bg-white p-6 md:p-8 rounded-2xl shadow-lg min-h-[500px] flex flex-col justify-center">
                 <div class="text-center">
                     <h3 class="font-montserrat text-3xl font-bold text-[#0A2342]">Bem-vindo</h3>
-                    <p class="mt-4 text-lg text-gray-600">Selecione uma etapa da jornada à esquerda para explorar os detalhes, desafios e conquistas de cada fase da minha carreira.</p>
+                    <p class="mt-4 text-lg text-gray-600">Selecione uma etapa da jornada para explorar os detalhes de cada fase da minha carreira.</p>
                      <div class="mt-8 chart-container">
                         <canvas id="skillsChart"></canvas>
                     </div>
@@ -84,8 +81,8 @@
         </main>
 
         <footer class="text-center mt-16">
-            <p class="text-gray-500">Storytelling interativo desenvolvido para disciplina de Business Analitics, turma 11DTS, FIAP.</p>
-             <p class="text-xs text-gray-400 mt-2">Justificativa: Modelo "Arco do Herói" escolhido por sua adequação a narrativas de transformação pessoal e superação. Validado por Ricardo.</p>
+            <p class="text-gray-500">Este storytelling foi desenvolvido para a disciplina de Business Analytics, turma 11DTS da FIAP.</p>
+             <p class="text-xs text-gray-400 mt-2">O modelo "Arco do Herói" foi o escolhido por se conectar com a minha história de transformação, atendendo as etapas do modelo. Validado por Ricardo.</p>
         </footer>
     </div>
 
@@ -96,35 +93,35 @@
                 title: "Mundo Comum",
                 subtitle: "As Raízes no Tocantins",
                 icon: "🏡",
-                content: `A jornada começa em Arraias, uma cidade com 11 mil habitantes no sudeste do Tocantins. Este era meu mundo: um lugar de raízes fortes, mas com horizontes que pareciam distantes. A paixão por tecnologia já existia, me levando a cruzar a divisa do estado todos os dias para um curso técnico em informática em Goiás. Era o primeiro sinal da minha inquietude e da vontade de buscar o conhecimento onde ele estivesse.`
+                content: `Minha história começa em Arraias, uma cidade de 11 mil habitantes no sudeste do Tocantins. Ali, onde minhas raízes são fortes, os horizontes pareciam distantes. A paixão por tecnologia já me movia e me fazia cruzar a divisa do estado todos os dias para fazer um curso técnico em Goiás. Era o primeiro sinal da minha inquietude e da vontade de buscar conhecimento onde quer que ele estivesse.`
             },
             {
                 id: 2,
                 title: "O Chamado à Aventura",
-                subtitle: "A Sede por Mais Conhecimento",
+                subtitle: "A Sede por Mais",
                 icon: "🗺️",
-                content: `O primeiro chamado me levou à capital, Palmas, para cursar Ciência da Computação na UFT. Mas a inquietude falou mais alto. Eu sentia que precisava de mais, de um desafio maior. O verdadeiro chamado foi a decisão de deixar tudo para trás e ir para a UFMG, em Belo Horizonte. Era a busca por um ecossistema mais avançado, um salto em direção ao desconhecido, movido pela sede de 'ter mais, ser mais, me capacitar mais'.`
+                content: `O primeiro grande passo me levou à capital, Palmas, para cursar Ciência da Computação na UFT. Mas a inquietude falou mais alto. Eu sentia que precisava de mais, de um desafio maior. O verdadeiro chamado veio com a decisão de ir para a UFMG, em Belo Horizonte. Era a busca por um ecossistema mais avançado, um salto no escuro, movido pela sede de 'ter mais, ser mais, me capacitar mais'.`
             },
             {
                 id: 3,
                 title: "Obstáculos",
-                subtitle: "A Prova de Fogo e a Adaptação",
+                subtitle: "Prova de Fogo e Adaptação",
                 icon: "⛰️",
-                content: `A vida em um novo estado trouxe desafios reais. As dificuldades para me manter me forçaram a um recuo estratégico, retornando ao Tocantins para concluir a graduação mais rápido. Mas isso não foi uma derrota, foi uma lição de resiliência. Após a formatura, a jornada recomeçou com mais força: uma peregrinação por centros de inovação — Brasília, Florianópolis e, finalmente, São Paulo — cada cidade um novo obstáculo, uma nova adaptação e um degrau a mais na minha formação.`
+                content: `A vida em um novo estado trouxe desafios reais. As dificuldades para me manter me fizeram voltar ao Tocantins para concluir a graduação mais rápido. Não encarei como uma derrota, mas como uma lição de resiliência. Depois de formado, a jornada recomeçou com mais força: uma peregrinação por centros de inovação — Brasília, Florianópolis e, finalmente, São Paulo. Cada cidade, um novo obstáculo e um degrau a mais na minha formação.`
             },
             {
                 id: 4,
                 title: "Vitória e Revelação",
                 subtitle: "O Arquiteto da Síntese",
                 icon: "💡",
-                content: `Em São Paulo, as peças se encaixaram. As experiências em consultoria, gestão e desenvolvimento profundo com Power Platform e Data Science se fundiram. A vitória não foi chegar a um lugar, mas a revelação de uma identidade profissional: o 'Arquiteto da Síntese'. A capacidade de não apenas programar ou gerenciar, mas de traduzir necessidades complexas de negócio em soluções tecnológicas eficazes, unindo mundos que muitos veem como separados.`
+                content: `Em São Paulo, as peças se encaixaram. As experiências em consultoria, gestão e desenvolvimento com Power Platform e Data Science se fundiram. A vitória não foi chegar a um lugar, mas descobrir minha identidade profissional: o 'Arquiteto da Síntese'. A capacidade de não apenas programar ou gerenciar, mas de traduzir problemas de negócio em soluções de tecnologia.`
             },
             {
                 id: 5,
                 title: "Retorno com o Elixir",
                 subtitle: "Pronto para Transformar",
                 icon: "✨",
-                content: `Hoje, estabelecido em São Paulo, carrego o 'elixir': a visão integrada entre tecnologia, dados e estratégia, forjada na jornada do interior para a metrópole. Sei que este não é o destino final. O retorno é um estado de prontidão contínua para aplicar essa capacidade de síntese em desafios maiores, para construir pontes e gerar transformação em qualquer ambiente. A jornada continua, e o elixir é a minha ferramenta para moldar o futuro.`
+                content: `Hoje, em São Paulo, carrego o 'elixir': uma visão que integra tecnologia, dados e estratégia, forjada na jornada do interior para a metrópole. Sei que este não é o destino final. O retorno é um estado de prontidão para aplicar essa capacidade de síntese em novos desafios, construir pontes e gerar transformação. A jornada continua, e o elixir é minha ferramenta para moldar o futuro.`
             }
         ];
 
@@ -163,10 +160,10 @@
             skillsChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Data Science & IA', 'Gestão de Projetos', 'Estratégia de Negócios', 'Desenvolvimento (Python/Power Platform)', 'Resiliência & Adaptação', 'Visão de Produto'],
+                    labels: ['Data Science & IA', 'Gestão de Projetos', 'Desenvolvimento (Python/Power Platform)', 'Resiliência & Adaptação', 'Visão de Produto'],
                     datasets: [{
-                        label: 'Competências do Elixir',
-                        data: [75, 80, 80, 90, 98, 85],
+                        label: 'Minhas Competências',
+                        data: [75, 80, 90, 98, 85],
                         backgroundColor: 'rgba(10, 35, 66, 0.2)',
                         borderColor: '#0A2342',
                         pointBackgroundColor: '#0A2342',
@@ -244,7 +241,6 @@
             
             createSkillsChart();
 
-            // Display the first item by default
             if (journeyData.length > 0) {
                 displayDetails(journeyData[0]);
             }
